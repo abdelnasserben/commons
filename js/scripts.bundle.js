@@ -8099,3 +8099,74 @@ var KTAppSidebar = function () {
 KTUtil.onDOMContentLoaded(function () {
 	KTAppSidebar.init();
 });
+
+
+//Class definition
+var KTFlatpickr = function () {
+    var flatpickr;
+
+    const initFlatpickr = () => {
+        flatpickr = $('.kt_flatpickr').flatpickr({
+            altInput: true,
+            altFormat: "d F, Y",
+            dateFormat: "Y-m-d",
+          });
+        }
+
+    return {
+        init: function () {
+
+            if (!flatpickr) {
+                return
+            }
+
+            initFlatpickr();
+        }
+    };
+}();
+KTUtil.onDOMContentLoaded(function () {
+    KTFlatpickr.init();
+});
+
+
+//Class definition
+var KTDatatable = function () {
+    // Define shared variables
+    var table
+    var datatable;
+
+    // Private functions
+    var initDatatable = function () {
+        // Init datatable --- more info on datatables: https://datatables.net/manual/
+        datatable = $(table).DataTable({
+            "info": false,
+            "order": [],
+        });
+    }
+
+    // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
+    var handleSearchDatatable = () => {
+        const filterSearch = document.querySelector('[data-kt-datatable-table-filter="search"]');
+        filterSearch.addEventListener('keyup', function (e) {
+            datatable.search(e.target.value).draw();
+        });
+    }
+
+
+    // Public methods
+    return {
+        init: function () {
+            table = document.querySelector('#kt_custom_datatable');
+
+            if (!table) {
+                return;
+            }
+
+            initDatatable();
+            handleSearchDatatable();
+        }
+    }
+}();
+KTUtil.onDOMContentLoaded(function () {
+    KTDatatable.init();
+});
