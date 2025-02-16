@@ -8103,10 +8103,11 @@ KTUtil.onDOMContentLoaded(function () {
 
 //Class definition
 var KTFlatpickr = function () {
+    var flatElement;
     var flatpickr;
 
     const initFlatpickr = () => {
-        flatpickr = $('.kt_flatpickr').flatpickr({
+        flatpickr = $(flatElement).flatpickr({
             altInput: true,
             altFormat: "d F, Y",
             dateFormat: "Y-m-d",
@@ -8115,8 +8116,9 @@ var KTFlatpickr = function () {
 
     return {
         init: function () {
+            flatElement = document.querySelectorAll('.kt_flatpickr');
 
-            if (!flatpickr) {
+            if (!flatElement) {
                 return
             }
 
